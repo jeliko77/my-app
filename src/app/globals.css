@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * 색과 글꼴 기준 (토스뱅크 홈페이지 분위기를 참고)
+ * - 어두운 배경 위에 한 단계 밝은 카드를 올리고, 강조는 파란색 하나만 쓴다
+ * - 글자는 흰색 / 옅은 회색 / 더 옅은 회색 세 단계로 나눈다
+ */
+@theme {
+  --color-page: #101013; /* 페이지 배경 */
+  --color-card: #1c1c21; /* 카드 배경 */
+  --color-card-hover: #26262c; /* 카드 안 강조 배경 */
+  --color-line: #2c2c33; /* 구분선 */
+  --color-ink: #ffffff; /* 제목 글자 */
+  --color-ink-soft: #e5e8eb; /* 본문 글자 */
+  --color-ink-muted: #8b95a1; /* 보조 글자 */
+  --color-brand: #3182f6; /* 강조 파란색 */
+  --color-brand-press: #1b64da; /* 파란 버튼을 눌렀을 때 */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR",
+    sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-page);
+  color: var(--color-ink-soft);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
