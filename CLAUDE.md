@@ -118,4 +118,5 @@ npx tsc --noEmit     # 타입 검사
 - `.env`에는 `OPENAI_API_KEY`, `GITHUB_TOKEN`, `SUPABASE_ACCESS_TOKEN`, `VERCEL_TOKEN`이 들어 있다.
 - Windows 환경이며, `python`/`python3`는 Microsoft Store 더미라 **실행해도 아무 일 없이 조용히 끝난다.** 스크립트가 필요하면 `node`를 쓴다.
 - `.bkit/`은 bkit 플러그인이 만드는 실행 상태 폴더다. 직접 수정하지 않는다. `.gitignore`에 들어 있어 커밋되지 않는다.
-- 배포 주소: `https://my-app-pi-two-33.vercel.app` (Vercel 팀 `moef1`, 프로젝트 `my-app`). GitHub: `jeliko77/my-app` (비공개, 기본 가지 `master`).
+- Vercel 프로젝트 `my-app` (연결 정보는 `.vercel/project.json`, 커밋되지 않음). GitHub: `jeliko77/my-app` (공개, 기본 가지 `master`).
+- **배포 주소는 커밋되는 문서(README·CLAUDE·DESIGN·TEST-CASES·CHECK 등)에 적지 않는다.** 저장소가 공개라서, 주소가 알려지면 누구나 OpenAI 요금을 쓸 수 있다. 채팅으로만 알린다.
