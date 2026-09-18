@@ -9,6 +9,8 @@ export type Todo = {
   text: string;
   /** 근거가 된 원문 문장. 화면에만 보여주고 복사하지 않는다. 원문에서 찾지 못하면 빈 문자열 */
   source: string;
+  /** 근거 원문이 AI에게 내리는 명령처럼 보이면 true (프롬프트 인젝션 의심). 화면에 경고를 띄운다 */
+  suspicious: boolean;
 };
 
 /** 성공 응답 */
@@ -25,3 +27,20 @@ export type ExtractError = {
 };
 
 export type ExtractResponse = ExtractSuccess | ExtractError;
+
+/** 묶음 한 개 (묶음 보기) */
+export type TodoGroup = {
+  /** 묶음 이름 (예: "관공서·행정") */
+  name: string;
+  /** 묶음 앞에 붙는 이모지. 없으면 빈 문자열 */
+  emoji: string;
+  /** 이 묶음에 들어가는 할 일의 위치 (0부터 시작, 원래 순서대로) */
+  indexes: number[];
+};
+
+/** /api/group 성공 응답 */
+export type GroupSuccess = {
+  groups: TodoGroup[];
+};
+
+export type GroupResponse = GroupSuccess | ExtractError;

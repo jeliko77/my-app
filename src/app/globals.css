@@ -16,6 +16,17 @@
   --color-brand: #3182f6; /* 강조 파란색 */
   --color-brand-press: #1b64da; /* 파란 버튼을 눌렀을 때 */
 
+  /* 상태 색 — 오류·경고 안내에만 쓴다. 배경은 "bg-danger/10"처럼 옅게 깔아 쓴다 */
+  --color-danger: #ef4444; /* 오류 상자 배경의 바탕색 */
+  --color-danger-ink: #fca5a5; /* 오류·명령 의심 경고 글자 */
+  --color-danger-strong: #f87171; /* 5,000자 초과 글자 수 */
+  --color-warn: #fbbf24; /* 잘림 안내 배경의 바탕색 */
+  --color-warn-ink: #fcd34d; /* 잘림 안내·원문 못 찾음 글자 */
+
+  /* 흰 알약 버튼 ([전체 복사], 개별 "복사됨") */
+  --color-chip: #ffffff;
+  --color-chip-ink: #212529;
+
   --font-sans:
     "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR",
     sans-serif;

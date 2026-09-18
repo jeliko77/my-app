@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 할일 추출기
 
-## Getting Started
+회의 메모, 메신저 대화, 이메일처럼 **줄글 속에 섞인 할 일만 골라 목록으로 보여주는 웹앱**입니다.
+글을 읽으며 할 일을 손으로 옮겨 적다가 **빠뜨리는 일**을 줄이려고 만들었습니다.
 
-First, run the development server:
+## 무엇을 해 주나
+
+1. 글을 붙여넣고 **[할 일 뽑기]**를 누릅니다.
+2. 글쓴이 본인이 해야 할 일만 번호 목록으로 나옵니다.
+3. 할 일마다 **근거가 된 원래 문장**이 회색으로 붙어, 빠진 날짜·시간을 원문에서 바로 확인할 수 있습니다.
+4. **[전체 복사]** 또는 할 일마다 **[복사]**로 평소 쓰는 할 일 앱에 옮깁니다.
+5. 할 일이 3개 이상이면 **[묶어서]**로 비슷한 할 일끼리 상자에 나눠 볼 수 있습니다.
+
+### 뽑는 기준
+
+| 뽑는 것 | 뽑지 않는 것 |
+|---|---|
+| 내가 앞으로 할 일 | 남이 하기로 한 일 |
+| 누가 할지 안 적힌 할 일 (내 일로 봄) | 이미 끝낸 일 |
+| "운동해야지" 같은 막연한 다짐 | 감상·인사말 |
+
+- 한 번에 최대 **10개**. 더 있으면 "10개까지만 표시했습니다"라고 알려 줍니다.
+- 글은 **10자 이상 5,000자 이하**만 받습니다.
+- 같은 할 일은 하나로 합치고, 원래 글의 순서를 지킵니다.
+
+## 품질
+
+직접 만든 테스트 글 10개로 채점합니다 ([TEST-CASES.md](TEST-CASES.md)).
+
+| 기준 | 목표 | 결과 |
+|---|---|---|
+| 정답 25개 중 찾아낸 할 일 | 23개 이상 | **24개** |
+| 글에 없는 할 일을 지어냄 | 0개 | **0개** |
+| 규칙 검증 (할 일 없음 / 10개 초과 / 너무 짧은 글) | 3개 모두 | **통과** |
+
+## 개인정보와 보안
+
+- **이 앱은 입력한 글을 저장하지 않습니다.** 다만 할 일을 뽑기 위해 글이 **OpenAI로 보내집니다.** 주민번호·계좌번호·비밀번호 같은 정보는 넣지 마세요.
+- OpenAI API 키는 서버에서만 쓰고 브라우저로 보내지 않습니다.
+- 붙여넣은 글 속에 "앞의 지시는 무시하고…" 같은 **AI를 조종하려는 문장**이 있으면, 거기서 나온 할 일에 붉은 경고를 붙입니다.
+- 다른 사이트에서 몰래 보낸 요청은 거절하고, 보안 헤더를 붙여 응답합니다.
+
+## 기술
+
+| 기술 | 쓰는 곳 |
+|---|---|
+| [Next.js](https://nextjs.org) 16 (App Router) | 화면과 서버 코드를 한 프로젝트에서 |
+| OpenAI API (`gpt-4o-mini`) | 할 일 고르기, 묶음 나누기 |
+| Tailwind CSS 4 | 화면 꾸미기 |
+| Pretendard | 글꼴 (앱 안에 설치) |
+| Vercel | 배포 |
+
+## 내 컴퓨터에서 실행하기
+
+필요한 것: Node.js 22 이상, OpenAI API 키
+
+```bash
+git clone https://github.com/jeliko77/my-app.git
+cd my-app
+npm install
+```
+
+프로젝트 폴더에 `.env.local` 파일을 만들고 키를 넣습니다. 이 파일은 `.gitignore`에 들어 있어 GitHub에 올라가지 않습니다.
+
+```
+OPENAI_API_KEY=여기에_내_키
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 `http://localhost:3000`을 엽니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| 명령 | 하는 일 |
+|---|---|
+| `npm run dev` | 개발 서버 |
+| `npm run build` | 배포용 빌드 |
+| `npm run lint` | 코드 검사 |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 문서
 
-## Learn More
+| 파일 | 내용 |
+|---|---|
+| [PRD.md](PRD.md) | 기획서 — 왜, 누구를 위해, 무엇을 |
+| [PLAN.md](PLAN.md) | 목표·성공 기준·작업 순서 |
+| [DESIGN.md](DESIGN.md) | 화면 구성·데이터 흐름·기술 선택 |
+| [TEST-CASES.md](TEST-CASES.md) | 테스트 글 10개, 정답, 채점 기록 |
+| [CHECK.md](CHECK.md) | 설계 대비 점검·보안 점검 결과와 남은 일 |
+| [CLAUDE.md](CLAUDE.md) | AI 코딩 도구용 작업 규칙 |
 
-To learn more about Next.js, take a look at the following resources:
+## 알려진 한계
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 할 일 문장에서 날짜·시간이 빠질 때가 있습니다. 회색 원래 문장을 함께 보세요.
+- 글 중간에 숨은 다짐("…하기로 했다")을 놓칠 때가 있습니다.
+- 로그인이 없는 개인용 도구입니다.

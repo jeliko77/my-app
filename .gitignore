@@ -40,5 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
-.env*
+
+# 작업 도구가 만드는 폴더 (앱 코드가 아님)
+.bkit/
+.claude/
+
+# 지울 파일을 잠시 옮겨 두는 폴더 (CLAUDE.md 규칙)
+trash-can/
